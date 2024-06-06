@@ -1,0 +1,10 @@
+TODO:
+Tärkeimmät:
+koodin refaktorointia / bugien metsästystä
+Kun on arvannut oikein
+    - arvausboksi harmaaksi
+    - kun valitsee arkistosta uuden pelin
+      boksi palautuu
+Ei arvo dailyä vaan ottaa ekan tietokannasta 
+ideoita vihjeille (mistä apista, miten häh)
+lisää koordinaatteja jos haluaa

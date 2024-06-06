@@ -1,0 +1,33 @@
+.close-btn {
+    background-color: black;
+    transition: background-color 0.2s ease-out;
+    height: 50px;
+    width: 50px;
+    position: fixed;
+    right: 0;
+    margin: 15px 15px 0 0;
+}
+
+.close-btn button {
+    position: fixed;
+    right: 0;
+    font-family: monospace;
+    font-size: x-large;
+    background-color: red;
+    cursor: pointer;
+    border: none;
+    color: white;
+    height: 50px;
+    width: 50px;
+    padding: 5px 10px 5px 10px;
+    margin: 0px 15px 0 0;
+    transition: all 0.1s ease-out;
+}
+
+.close-btn button:hover {
+    transform: translate(2px, -2px);
+}
+
+.close-btn > button:active {
+    transform: translate(0px, 0px);
+}

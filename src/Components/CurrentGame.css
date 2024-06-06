@@ -1,0 +1,18 @@
+.currentGame {
+    min-width: 250px;
+    right: 15px;
+    font-family: monospace;
+    font-size: large;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    padding-left: 1em;
+    padding-right: 1em;
+    text-align: center;
+    background-color: #ff8695;
+    color: black;
+}
+
+.currentGame > p {
+	margin-block: 0.5em;
+}

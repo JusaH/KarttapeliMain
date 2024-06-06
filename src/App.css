@@ -1,0 +1,418 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: grid;
+    grid:
+    "map-pano" 1fr
+    "ala-laatikko" auto
+    / 1fr;
+}
+
+/* karttapelin logo sijoitettuna vasempaan yläkulmaan */
+h1 {
+    font-family: monospace;
+    background-color: #ff8695;
+    z-index:100;
+    position: fixed;
+    top: 0;
+    color: white;
+    margin: 0px 15px 0px 15px;
+    padding: 5px 10px 5px 5px;
+}
+
+/* alareunan laatikko fixattuna */
+.ala-laatikko {
+    font-family: monospace;
+    background-color: pink;
+    padding: 3px;
+    z-index: 1000;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: start;
+    align-items: inherit;
+    align-content: start;
+    grid-area: ala-laatikko;
+}
+
+/* alalaatikossa olevien nappien paikat */
+.item {
+    margin: 5px;
+    height: 50px;
+    width: 50px;
+    background-color: black;
+    transition: background-color 0.2s ease-out;
+}
+
+/* alalaatikon napit */
+.item > button {
+    height: 100%;
+    width: 100%;
+    font-family: monospace;
+    font-size: x-large;
+    background-color: #ff8695;
+    border: none;
+    color: white;
+    transition: all 0.1s ease-out;
+}
+
+/* nappien hoverointi */
+.item > button:hover {
+    background-color: #ff8695;
+    cursor: pointer;
+    transform: translate(2px, -2px);
+}
+
+.item > button:active {
+    transform: translate(0px, 0px);
+}
+
+/* alalaatikon vastauslaatikon pohja */
+.item-big {
+	display: flex;
+    margin: 5px;
+    height: 50px;
+    flex-grow: 1;
+    background-color: #ff8695;
+}
+
+/* vastauslaatikko */
+.item-big > input {
+    padding-left: 12px;
+    background-color: transparent;
+    border: none;
+    font-family: monospace;
+    font-size: xx-large;
+	flex-grow: inherit;
+}
+
+input[disabled] {
+	background-color: #b17575;
+}
+
+/* inputin placeholder */
+::placeholder {
+    color: pink;
+    opacity: 1;
+}
+
+/* vastauslaatikon outline pois */
+textarea:focus, input:focus{
+    outline: none;
+}
+
+/* form */
+form {
+    display: flex;
+    flex-grow: 1;
+}
+
+/* käyttäjän edelliset vastaukset oikeassa yläkulmassa */
+.history_box {
+    font-family: monospace;
+    font-size: large;
+    min-width: 200px;
+    padding-right: 15px;
+    z-index:100;
+    position: fixed;
+    right: 0;
+    top: 0;
+    margin-right: 10px;
+    text-align: center;
+    background-color: #ff8695;
+    color: black;
+}
+
+a[href^="http://maps.google.com/maps"]{pointer-events: none;}
+a[href^="https://maps.google.com/maps"]{pointer-events: none;}
+
+.right {
+    list-style-type: "✅";
+}
+
+.wrong {
+    list-style-type: "❌";
+}
+
+caption {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+td {
+    padding: 0 2em;
+}
+
+/* highscore ja ohjeet ilmestyy koko ruudulle */
+.info-screen {
+    position: fixed;
+    z-index: 1000;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+}
+
+/* highscore ja ohjeet taulukossa keskitetysti */
+.info-screen table {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.info-screen2 {
+    text-align: center;
+    position: fixed;
+    z-index: 1000;
+    height: 100%;
+    width: 100%;
+    background: rgba(238, 238, 238, 0.9);
+    color: black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.info-screen-content {
+    margin: 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.hints {
+	list-style: none;
+    z-index: 100;
+    position: fixed;
+    left: 10px;
+    top: 50px;
+	padding-inline-start: 0;
+}
+
+.hints > li {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: start;
+	align-items: center;
+}
+
+.hints > li > span {
+	color: white;
+	padding: 0.5em;
+}
+
+.normal {
+    font-weight: normal;
+}
+
+.highlight {
+    font-weight: bold;
+    color: rgb(53, 168, 84);
+}
+
+.disabled {
+    background-color: grey !important;
+    transform: none !important;
+    cursor: not-allowed !important;
+}
+
+.selectedHint {
+    font-weight: bold;
+}
+
+.wrongHint {
+    background-color: crimson !important;
+}
+
+.rightHint {
+    background-color: green !important;
+}
+
+.item > .selectedHint {
+    border: 3px solid white;
+}
+
+.arvausNimiWrong {
+    height: 50px;
+    margin-top: 0;
+    background-color: rgba(220, 20, 60, 0.7);
+    color: white;
+    font-size: x-large;
+}
+
+.arvausNimiRight {
+    height: 50px;
+    margin-top: 0;
+    background-color: rgba(0, 128, 0, 0.9);
+    color: white;
+    font-size: x-large;
+}
+
+.arvausP {
+    margin: 10px;
+}
+
+/* poistaa chromen oudon mustan nuolen inputista */
+input::-webkit-calendar-picker-indicator {
+    display: none;
+    opacity: 0;
+}
+
+.logout {
+    padding: 5px;
+    font-size: large;
+    font-family: system-ui;
+    background-color: pink;
+    border: none;
+    color: black;
+    transition: all 0.1s ease-out;
+}
+
+.logout:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.valkoinenNappi {
+    margin: 5px;
+    padding: 5px;
+    font-size: large;
+    font-family: system-ui;
+    background-color: white;
+    border: none;
+    color: black;
+    transition: all 0.1s ease-out;
+}
+.valkoinenNappi:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.archive-tausta {
+    text-align: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    height: 100%;
+    width: 100%;
+    background: rgba(238, 238, 238, 0.9);
+    color: black;
+}
+
+.archive-tausta > h1 {
+    text-align: center;
+    background-color: #ff8695;
+    color: black;
+    width: 35%;
+    margin: 0;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: -4px 4px #1c1c1c;
+}
+
+.archive {
+    overflow-y: scroll;
+    background-color: pink;
+    height: 56%;
+    margin: 0;
+    width: 40vw;
+    max-width: 250px;
+    min-width: 200px;
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: -4px 4px #1c1c1c;
+}
+
+.archive > ul {
+    margin: 0.3em;
+    padding: 0.2em;
+    left: 50%;
+    list-style-type: none;
+}
+
+.archive li {
+    width: 90%;
+}
+
+.archive-date {
+    background-color: black;
+    transition: background-color 0.2s ease-out;
+    display: inline-block;
+    background-color: black;
+    margin: 4px;
+    transition: all 0.1s ease-out;
+    font-family: monospace;
+    font-size: small;
+}
+
+.archive-date > button {
+    background-color: #ff8695;
+    height: 100%;
+    width: 100%;
+    padding: 4px;
+    border: none;
+
+}
+
+.archive-date > button:hover {
+    cursor: pointer;
+    transform: translate(2px, -2px);
+    transition: all 0.1s ease-out;
+}
+
+.oikeaVastaus {
+    text-align: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    height: 100%;
+    width: 100%;
+    background: rgba(144, 238, 144, 0.9);
+    color: black;
+}
+
+.oikeaVastaus h3, .gameOver h3{
+    font-size: xx-large;
+    margin: 0;
+}
+
+.gameOver {
+    text-align: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 99, 71, 0.9);
+    color: black;
+}
+
+.hautakivi {
+    font-size: 100px;
+}
+
+#map {
+    z-index: 2;
+    display: none;
+    grid-area: map-pano;
+}
+#pano {
+    z-index: 1;
+    grid-area: map-pano;
+}
